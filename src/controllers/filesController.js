@@ -9,6 +9,8 @@ const BASE_URL = 'https://echo-serv.tbxnet.com/v1/secret';
 // Función para gestionar la obtención y procesamiento de archivos
 export const filesManagement = async (req, res) => {
     try {
+        //Verifica si la peticion exige que se devuelvan los datos segun el param
+        const fileName = req?.query?.fileName;
         // 1. Obtener la lista de archivos
         const filesResponse = await axios.get(`${BASE_URL}/files`, {
             headers: { authorization: API_KEY } // Añadimos el token en los headers
@@ -55,11 +57,28 @@ export const filesManagement = async (req, res) => {
             }
         }
 
-        // Enviamos la respuesta en formato JSON
-        res.json(result);
+        //Respuesta de ser una consulta comun
+        if (!fileName) {
+            // Enviamos la respuesta en formato JSON
+            res.json(result);            
+            return;
+        }
+        //Respuesta de existir el filename
+        if (fileName) {
+            const filtering = result.filter((file) => file.file.toLowerCase().includes(fileName.toLowerCase()));
+            //Si no existe un archivo, devuelve un mensaje.
+            //Busca coincidencia mas no que sea totalmente igual
+            if (!filtering.length) {
+                res.status(404).json({ message: 'No hay archivos con este nombre' });
+                return;
+            }
+            res.json(filtering);
+            return;
+        }
     } catch (error) {
         // Manejo de errores al obtener la lista de archivos
         console.error('Error al obtener la lista de archivos:', error.message);
         res.status(500).json({ error: 'Error al procesar la solicitud' }); // Enviamos un error 500 si algo falla
     }
 };
+

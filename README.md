@@ -48,6 +48,15 @@ http://localhost:3000/api/files/data
 
 Este endpoint **no recibe ningún parámetro**.
 
+
+El endpoint para obtener los archivos según su nombre:
+
+```
+http://localhost:3000/api/files/data?fileName=NombreDeTuArchivo
+```
+
+Este endpoint **recibe un Query Param ===>>> ?fileName='NombreDeTuArchivo'**.
+
 ---
 
 ## 🛑 Detener el Contenedor
