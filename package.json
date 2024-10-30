@@ -1,0 +1,32 @@
+{
+  "name": "toolbox-test-api",
+  "version": "1.0.0",
+  "description": "Toolbox API test",
+  "main": "server.js",
+  "scripts": {
+    "docker:stop": "docker stop toolbox-test-api",
+    "test": "cd src/tests && npx mocha test.js",
+    "init": "nodemon src/app.js",
+    "start": "docker build -t toolbox-test-api . && docker rm toolbox-test-api && docker run --name toolbox-test-api -p 3000:3000 toolbox-test-api"
+  },
+  "author": "Nestor Quinones",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.7"
+  },
+  "type": "module",
+  "devDependencies": {
+    "chai": "^5.1.2",
+    "chai-http": "^5.1.1",
+    "mocha": "^10.8.1",
+    "sinon": "^19.0.2",
+    "sinon-chai": "^4.0.0"
+  },
+  "engines": {
+    "node": "14"
+  }
+}

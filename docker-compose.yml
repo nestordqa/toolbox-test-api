@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  toolbox-test-api:
+    image: toolbox-test-api:latest  # Replace with your actual image name
+    build:
+      context: .
+      dockerfile: Dockerfile  # Specify your Dockerfile if needed
+    ports:
+      - "3000:3000"  # Map host port to container port
+    volumes:
+      - .:/usr/src/app  # Mount current directory to the container
+    environment:
+      NODE_ENV: development  # Set environment variables as needed
+    command: npm run start  # Command to run your application
+
+volumes:
+  db_data:  # Define a volume for persistent database storage
