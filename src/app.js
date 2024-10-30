@@ -18,7 +18,7 @@ app.use(express.json());
 //Se setea un prefijo 'api' para todos los endpoints
 app.use('/api', filesRoutes);
 
-const PORT = 3000;
+const PORT = 3001;
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT} ✔︎✔`);

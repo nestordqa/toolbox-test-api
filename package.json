@@ -7,7 +7,7 @@
     "docker:stop": "docker stop toolbox-test-api",
     "test": "cd src/tests && npx mocha test.js",
     "init": "nodemon src/app.js",
-    "start": "docker build -t toolbox-test-api . && docker rm toolbox-test-api && docker run --name toolbox-test-api -p 3000:3000 toolbox-test-api"
+    "start": "docker build -t toolbox-test-api . && docker rm toolbox-test-api && docker run --name toolbox-test-api -p 3001:3001 toolbox-test-api"
   },
   "author": "Nestor Quinones",
   "license": "ISC",
