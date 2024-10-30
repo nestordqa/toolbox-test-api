@@ -35,13 +35,16 @@ export const filesManagement = async (req, res) => {
                 const lines = fileResponse.data.split('\n').map(line => {
                     const [fileName, text, number, hex] = line.split(',');
                     // Validamos que las columnas necesarias estén presentes
-                    if (text && !isNaN(number) && hex) {
-                        console.log(number); // Registro del número para depuración
+                    if (text && !isNaN(number) && hex.length === 32) {
                         return { text, number: parseInt(number), hex }; // Retornamos un objeto con los datos válidos
                     }
                     // Validación adicional para detectar líneas con el valor 'number'
                     if (isNaN(number)) {
                         console.error(`Error en línea: 'number' encontrado, reanudando consulta...`);
+                    }
+                    //Valida la longitud de la propiedad hex
+                    if (hex.length !== 32) {
+                        console.error(`Error en línea: Hex no tiene los caracteres suficientes`);
                     }
                     return null; // Línea inválida
                 }).filter(Boolean); // Filtramos las líneas inválidas
